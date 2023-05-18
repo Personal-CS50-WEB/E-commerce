@@ -1,26 +1,21 @@
-const con = require('../configs/connect-db'); // Assuming the module is saved as db.js
+const con = require('../configs/connect-db'); 
 const createCollectionIfNotExists = require('../utils/createCollection');
+
 // Connect to the MongoDB server
-async function connectAndCreateCollections() {
+module.exports = async function () {
+    let db = null;
     try {
-        await con.connect();
         // Use the connection
-        const client = con.getClient();
-        const db = client.db();
+        db = await con.connect();
         // Perform operations on the collection
-        const collectionsToCreate = ['users', 'products', 'likes', 'comments'];
+        const collectionsToCreate = ['users', 'products', 'likes', 'comments', 'orders'];
         // Create collections if they don't exist
         for (const collectionName of collectionsToCreate) {
             await createCollectionIfNotExists(db, collectionName);
         }
     } catch (error) {
         console.error('Failed to connect to MongoDB', error);
-    } finally {
-        // Close the connection
-        if (con.getClient()) {
-            con.close();
-        }
-    }
+    }  
+    return db;
 }
 
-connectAndCreateCollections();

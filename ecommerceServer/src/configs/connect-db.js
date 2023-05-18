@@ -9,24 +9,23 @@ const options = {
 
 // Create a reusable connection
 let client = null;
-
+let db = null;
 // Connect to MongoDB
 async function connect() {
     try {
         if (!client) {
             client = new MongoClient(url, options);
             await client.connect();
+            db = await client.db( process.env.dbname)
             console.log('Connected to MongoDB');
         }
     } catch (error) {
         console.error('Failed to connect to MongoDB', error);
     }
+    return db;
 }
 
-// Get the connected client
-function getClient() {
-    return client;
-}
+// close the connected client
 function close() {
     if (client) {
         client.close();
@@ -34,9 +33,8 @@ function close() {
     }
 }
 
-// Export the connect and getClient functions
+// Export the connect and close functions
 module.exports = {
     connect,
-    getClient,
     close,
 };
