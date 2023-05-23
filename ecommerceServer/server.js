@@ -12,12 +12,16 @@ const connectDB = require('./src/configs/connect-db')
 
 const connectAndCreateCollections = require('./src/models/createCollections.js');
 const app = express();
-
+app.use(
+    cors(),
+    bodyParser.urlencoded({ extended: true }),
+    bodyParser.json()
+);
 
 async function startServer() {
     try {
         const db = await connectAndCreateCollections();
-        let apiRouter = require("./src/routes/api")(db);
+        let apiRouter = require("./src/middlewares/api")(db);
         // Mount the API router
         app.use('/api', apiRouter);
 
@@ -30,11 +34,6 @@ async function startServer() {
         app.get('/', (req, res) => {
             res.send('Hello from my app');
         });
-        app.use(
-            cors(),
-            bodyParser.urlencoded({ extended: true }),
-            bodyParser.json()
-        );
         app.listen(PORT, () => {
             debug(`listening on port ${chalk.green(PORT)}`);
         });
