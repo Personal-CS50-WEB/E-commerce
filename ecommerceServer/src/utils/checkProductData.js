@@ -100,28 +100,27 @@ async function CheckProductData(products, newProducts) {
             });
         }
 
-        if (!Array.isArray(newProduct.photos) || newProduct.photos.length === 0) {
-            errors.push({
-                index: index,
-                field: 'photos',
-                error: 'type',
-                message: 'Photos must be a non-empty array',
-            });
-        } else {
-            newProduct.photos.forEach((photo, photoIndex) => {
-                if (!photo.url) {
-                    errors.push({
-                        index: index,
-                        photoIndex: photoIndex,
-                        field: 'photos.url',
-                        error: 'required',
-                        message: 'URL is required in photos',
-                    });
-                }
-            });
-        }
+        // if (!Array.isArray(newProduct.photos) || newProduct.photos.length === 0) {
+        //     errors.push({
+        //         index: index,
+        //         field: 'photos',
+        //         error: 'type',
+        //         message: 'Photos must be a non-empty array',
+        //     });
+        // } else {
+        //     newProduct.photos.forEach((photo, photoIndex) => {
+        //         if (!photo.url) {
+        //             errors.push({
+        //                 index: index,
+        //                 photoIndex: photoIndex,
+        //                 field: 'photos.url',
+        //                 error: 'required',
+        //                 message: 'URL is required in photos',
+        //             });
+        //         }
+        //     });
+        // }
     };
-console.log(errors)
     return errors;
 }
 

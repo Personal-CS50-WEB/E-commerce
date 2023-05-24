@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const express = require('express');
 const router = express.Router();
-const CheckUpdatedData = require('../utils/CheckUpdatedData');
+const CheckUpdatedData = require('../../utils/CheckUpdatedData');
 
 module.exports = function (products) {
     router

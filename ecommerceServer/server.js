@@ -1,27 +1,35 @@
 require('dotenv').config();
 
-const { MongoClient } = require('mongodb');
 const express = require('express');
+const session = require('express-session');
 const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 const connectDB = require('./src/configs/connect-db')
 
 const connectAndCreateCollections = require('./src/models/createCollections.js');
 const app = express();
-app.use(
-    cors(),
-    bodyParser.urlencoded({ extended: true }),
-    bodyParser.json()
-);
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.secret
+}), cors(),
+bodyParser.urlencoded({ extended: true }),
+bodyParser.json(),
+passport.initialize(),
+passport.session());
 
 async function startServer() {
     try {
         const db = await connectAndCreateCollections();
         let apiRouter = require("./src/middlewares/api")(db);
+        require('./src/configs/local-strategy')(db);
+        require('./src/configs/auth.config')(db);
         // Mount the API router
         app.use('/api', apiRouter);
 

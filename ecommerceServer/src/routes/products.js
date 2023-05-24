@@ -1,12 +1,12 @@
 let express = require("express");
 let router = express.Router();
 
-const productsListRouter = require('../controllers/productsList');
-const productSearchRouter = require('../controllers/productSearch');
-const productCreationRouter = require('../controllers/productCreation');
-const productDetailRouter = require('../controllers/productDetail');
-const productUpdateRouter = require('../controllers/productUpdate');
-const productDeletionRouter = require('../controllers/productDeletion');
+const productsListRouter = require('../controllers/products/productsList');
+const productSearchRouter = require('../controllers/products/productSearch');
+const productCreationRouter = require('../controllers/products/productCreation');
+const productDetailRouter = require('../controllers/products/productDetail');
+const productUpdateRouter = require('../controllers/products/productUpdate');
+const productDeletionRouter = require('../controllers/products/productDeletion');
 
 module.exports = function (db) {
     const products = db.collection('products');
