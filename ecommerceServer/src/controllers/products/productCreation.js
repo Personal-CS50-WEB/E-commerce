@@ -13,7 +13,7 @@ module.exports = function (products) {
     router.post('/', upload.array("photos[]"), async (req, res) => {
         try {
             const newProducts = [req.body];
-            
+            console.log(AWS)
             const uploadedPhotos = req.files;
 
             if (!Array.isArray(newProducts)) {
