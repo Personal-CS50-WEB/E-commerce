@@ -21,7 +21,7 @@ module.exports = function (products) {
                 return;
             }
             let errors = [];
-            // errors = await CheckProductData(products, newProducts);
+            errors = await CheckProductData(products, newProducts);
 
             if (errors.length) {
                 res.status(422).send(errors);
