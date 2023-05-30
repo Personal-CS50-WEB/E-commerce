@@ -1,61 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const CheckProductData = require('../../utils/checkProductData');
-const { AWS, s3, bucketName } = require('../../configs/aws.config');
 
-const multer = require('multer');
-
-// Set up Multer storage configuration
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const addToBucket = require('../../utils/addToBucket')
+const { storage, upload } = require('../../configs/multer.config')
 
 module.exports = function (products) {
     router.post('/', upload.array("photos[]"), async (req, res) => {
         try {
-            const newProducts = [req.body];
-            console.log(AWS)
+            const newProduct = req.body;
             const uploadedPhotos = req.files;
 
-            if (!Array.isArray(newProducts)) {
-                res.status(400).send({ error: 'Invalid data format. Expected an array of products.' });
-                return;
+            if (uploadedPhotos.length < 1) {
+                res.status(422).send("Photos required");
+                return
             }
             let errors = [];
-            errors = await CheckProductData(products, newProducts);
+            errors = await CheckProductData(products, newProduct);
 
             if (errors.length) {
                 res.status(422).send(errors);
             } else {
-                const photoUrls = await Promise.all(
-                    uploadedPhotos.map(async (file) => {
-                        // Create a unique filename for the photo
-                        const filename = Date.now().toString() + "_" + file.originalname;
-                        const params = {
-                            Bucket: bucketName,
-                            Key: filename,
-                            Body: file.buffer, // The photo file buffer
-                        };
+                // Add the photo to s3 bucket
+                const photoUrls = await addToBucket(uploadedPhotos);
 
-                        // Upload the photo file to S3
-                        await s3.upload(params).promise();
+                // Add the photoUrls to the newProduct
+                newProduct.photos = photoUrls;
 
-                        // Generate the S3 URL for the uploaded photo
-                        const photoUrl = `https://${bucketName}.s3.amazonaws.com/${filename}`;
-                        return { url: photoUrl };
-                    })
-                );
-                // Add the photoUrls to the newProducts or modify the product schema to include the photoUrls field
-                newProducts.forEach((product, index) => {
-                    product.photos = photoUrls[index];
-                });
-                console.log
-                (newProducts)
-                const result = await products.insertMany(newProducts);
-                const insertedIds = result.insertedIds;
+                const result = await products.insertOne(newProduct);
+                const insertedId = result.insertedId;
 
                 // Retrieve the inserted data by querying the collection
-                const insertedData = await products.find({ _id: { $in: Object.values(insertedIds) } }).toArray();
-
+                const insertedData = await products.findOne({ _id: insertedId });
                 res.send(insertedData);
             }
         } catch (error) {

@@ -1,7 +1,9 @@
-async function CheckUpdatedData(updatedFields) {
+async function CheckUpdatedData(updatedFields, res) {
     const errors = [];
 
     for (const key in updatedFields) {
+
+        // Check for name field
         if (key === 'name') {
             if (!updatedFields[key]) {
                 errors.push({
@@ -24,6 +26,7 @@ async function CheckUpdatedData(updatedFields) {
             }
         }
 
+        // Check for price field
         if (key === 'price') {
             if (updatedFields[key] && isNaN(Number(updatedFields[key]))) {
                 errors.push({
@@ -34,25 +37,29 @@ async function CheckUpdatedData(updatedFields) {
             }
         }
 
+        // Check for category field
         if (key === 'category') {
-            if (!updatedFields[key] || typeof updatedFields[key] !== 'object') {
+            if (!updatedFields[key]) {
                 errors.push({
                     field: key,
                     error: 'type',
-                    message: 'Category must be an object',
+                    message: 'Category missing',
                 });
             } else {
-                if (updatedFields[key].gender && typeof updatedFields[key].gender !== 'string') {
+                // Check for gender field within category
+                if (updatedFields[key].gender && updatedFields[key].gender !== 'male' && updatedFields[key].gender !== 'female') {
                     errors.push({
                         field: `${key}.gender`,
                         error: 'type',
-                        message: 'Gender must be a string',
+                        message: 'Gender missing',
                     });
                 }
 
 
             }
         }
+
+        // Check for color field
         if (key === 'color') {
             if (!updatedFields[key]) {
                 errors.push({
@@ -69,6 +76,7 @@ async function CheckUpdatedData(updatedFields) {
             }
         }
 
+        // Check for onSale field
         if (key === 'onSale') {
             if (isNaN(Number(updatedFields[key]))) {
                 errors.push({
@@ -79,6 +87,7 @@ async function CheckUpdatedData(updatedFields) {
             }
         }
 
+        // Check for availableItems field
         if (key === 'availableItems') {
             if (!Array.isArray(updatedFields[key])) {
                 errors.push({
@@ -107,8 +116,10 @@ async function CheckUpdatedData(updatedFields) {
             }
         }
     }
-
-    return errors;
+    if (errors.length > 0) {
+        // If there are validation errors, return an error response
+        return res.status(400).send({ errors: errors });
+    }
 }
 
 module.exports = CheckUpdatedData;
