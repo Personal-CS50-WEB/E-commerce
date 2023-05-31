@@ -14,20 +14,26 @@ const connectDB = require('./src/configs/connect-db')
 
 const connectAndCreateCollections = require('./src/models/createCollections.js');
 const app = express();
+app.use(require('express-session')({   
+    secret: process.env.secret,   
+    resave: false,   
+    saveUninitialized: false }));
 app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: process.env.secret
-}), cors(),
-bodyParser.urlencoded({ extended: true }),
-bodyParser.json(),
-passport.initialize(),
-passport.session());
-
+}),
+    cors(),
+    bodyParser.urlencoded({ extended: true }),
+    bodyParser.json(),
+    passport.initialize(),
+    passport.session());
+    
 async function startServer() {
     try {
         const db = await connectAndCreateCollections();
         let apiRouter = require("./src/middlewares/api")(db);
+        
         require('./src/configs/local-strategy')(db);
         require('./src/configs/auth.config')(db);
         // Mount the API router
@@ -52,7 +58,7 @@ async function startServer() {
 
 // Close the MongoDB connection when the app is terminated
 process.on('SIGINT', async () => {
-    await connectDB.close();
+    connectDB.close();
     process.exit();
 });
 

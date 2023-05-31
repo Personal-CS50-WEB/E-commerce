@@ -14,7 +14,7 @@ module.exports = function (users) {
                 }
 
                 if (!user) {
-                    res.status(401).json({ error: info.message }).send();
+                    res.status(401).json({ error: info }).send();
                     return;
                 }
 

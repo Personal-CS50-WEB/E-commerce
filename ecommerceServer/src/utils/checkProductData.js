@@ -92,7 +92,6 @@ async function CheckProductData(products, newProduct) {
                     message: 'Size is required in availableItems',
                 });
             }
-
             // Validate the numberOfAvailableItems field in each available item
             if (item.numberOfAvailableItems && isNaN(Number(item.numberOfAvailableItems))) {
                 errors.push({

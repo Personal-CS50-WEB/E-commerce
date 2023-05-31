@@ -8,7 +8,7 @@ module.exports = function (users) {
     router.get('/logout', (req, res) => {
         req.logout(function(err) {
             if (err) { return next(err); }
-            res.redirect('/login');})
+            res.redirect('/');})
         // Return a success message
     });
     return router;

@@ -8,8 +8,9 @@ module.exports = function (db) {
         done(null, user.email);
     });
 
-    passport.deserializeUser((email, done) => {
-        const user = users.find(user => user.email === email);
+    passport.deserializeUser(async(email, done) => {
+        const user = await users.findOne({email:email});
+        
         done(null, user);
     });
     require(path.join(__dirname, 'local-strategy'));

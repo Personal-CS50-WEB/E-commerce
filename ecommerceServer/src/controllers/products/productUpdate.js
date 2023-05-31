@@ -7,11 +7,13 @@ const deleteFromBucket = require('../../utils/deleteFromBucket');
 const updateCategory = require('../../utils/updateCategory');
 const updatedAvailable = require('../../utils/updateAvailableItems');
 const { storage, upload } = require('../../configs/multer.config')
+const adminCheck = require('../../utils/users/adminCheck');
 
 module.exports = function (products) {
     router
-        .patch('/:id', upload.array("photos[]"), async (req, res) => {
+        .patch('/:id', adminCheck, upload.array("photos[]"), async (req, res) => {
             try {
+                
                 const { id } = req.params;
                 const updateQuery = { _id: ObjectId(id) };
                 let updatedFields = req.body;
@@ -19,12 +21,12 @@ module.exports = function (products) {
                 let deletePhotos = true;
 
                 // Call the validation function to check the updatedFields data
-                await CheckUpdatedData(updatedFields,res);
+                await CheckUpdatedData(updatedFields, res);
 
                 // Update the category fields without deleting other fields
                 updatedFields = await updateCategory(updatedFields);
 
-                
+
                 // Update the availableItems without deleting other items
                 updatedFields = await updatedAvailable(updatedFields, products, id);
 

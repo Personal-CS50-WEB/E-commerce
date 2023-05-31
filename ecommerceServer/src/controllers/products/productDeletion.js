@@ -2,10 +2,12 @@ const { ObjectId } = require('mongodb');
 const express = require('express');
 const router = express.Router();
 const deleteFromBucket = require('../../utils/deleteFromBucket');
+const adminCheck = require('../../utils/users/adminCheck');
 
 module.exports = function (products) {
-    router.delete("/:id", async (req, res) => {
+    router.delete("/:id", adminCheck, async (req, res) => {
         try {
+            
             const { id } = req.params;
 
             // Retrieve the photos URLs from the database

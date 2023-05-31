@@ -8,7 +8,7 @@ module.exports = function(db){
         new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
             try {
                 // Check if email exists in the database
-                const user = users.find(user => user.email === email);
+                const user = await users.findOne({email:email});
                 if (!user) {
                     return done(null, false, { message: 'Email not found' });
                 }
@@ -18,7 +18,6 @@ module.exports = function(db){
                 if (!passwordMatch) {
                     return done(null, false, { message: 'Incorrect password' });
                 }
-
                 // Authentication successful
                 return done(null, user);
             } catch (error) {
