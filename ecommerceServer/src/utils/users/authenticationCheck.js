@@ -1,4 +1,4 @@
-function authCheck(req, res, next) {
+function isAuthenticated(req, res, next) {
     
     if (req.user) {
         next();
@@ -7,4 +7,4 @@ function authCheck(req, res, next) {
     }
 
 }
-module.exports = authCheck;
+module.exports = isAuthenticated;
