@@ -1,11 +1,11 @@
 const { ObjectId } = require('mongodb');
 const express = require('express');
 const router = express.Router();
-const CheckUpdatedData = require('../../utils/CheckUpdatedData');
-const addToBucket = require('../../utils/addToBucket');
-const deleteFromBucket = require('../../utils/deleteFromBucket');
-const updateCategory = require('../../utils/updateCategory');
-const updatedAvailable = require('../../utils/updateAvailableItems');
+const CheckUpdatedData = require('../../utils/products/CheckUpdatedData');
+const addToBucket = require('../../utils/products/addToBucket');
+const deleteFromBucket = require('../../utils/products/deleteFromBucket');
+const updateCategory = require('../../utils/products/updateCategory');
+const updatedAvailable = require('../../utils/products/updateAvailableItems');
 const { storage, upload } = require('../../configs/multer.config')
 const adminCheck = require('../../utils/users/adminCheck');
 
@@ -16,7 +16,7 @@ module.exports = function (products) {
                 const { id } = req.params;
 
                 // Validate the product ID
-                if (!ObjectId.isValid(productId)) {
+                if (!ObjectId.isValid(id)) {
                     return res.status(400).send({ error: 'Invalid product ID' });
                 }
                 const updateQuery = { _id: ObjectId(id) };
@@ -25,11 +25,10 @@ module.exports = function (products) {
                 let deletePhotos = true;
 
                 // Call the validation function to check the updatedFields data
-                await CheckUpdatedData(updatedFields, res);
+                await CheckUpdatedData(updatedFields, res, products, id );
 
                 // Update the category fields without deleting other fields
                 updatedFields = await updateCategory(updatedFields);
-
 
                 // Update the availableItems without deleting other items
                 updatedFields = await updatedAvailable(updatedFields, products, id);

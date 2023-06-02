@@ -1,4 +1,12 @@
-async function CheckUpdatedData(updatedFields, res) {
+const getProductFromDatabase = require('./checkIfExists');
+const { ObjectId } = require('mongodb');
+
+async function CheckUpdatedData(updatedFields, res, products, id) {
+    const query = { _id: ObjectId(id) };
+    const existingProduct = await getProductFromDatabase(products, query);
+    if (!existingProduct) {
+        res.status(400).send({ error: "No product found" });
+    }
     const errors = [];
 
     for (const key in updatedFields) {

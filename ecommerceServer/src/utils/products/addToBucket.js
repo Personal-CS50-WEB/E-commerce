@@ -1,4 +1,4 @@
-const { AWS, s3, bucketName } = require('../configs/aws.config');
+const { AWS, s3, bucketName } = require('../../configs/aws.config');
 /**
  * Uploads photos to the S3 bucket and returns their URLs.
  * @param {Object[]} uploadedPhotos - Array of uploaded photos.

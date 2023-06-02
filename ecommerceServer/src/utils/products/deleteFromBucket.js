@@ -1,4 +1,4 @@
-const { AWS, s3, bucketName } = require('../configs/aws.config');
+const { AWS, s3, bucketName } = require('../../configs/aws.config');
 /**
  * Deletes photos from the S3 bucket.
  * @param {string[]} photoUrls - Array of photo URLs to delete.

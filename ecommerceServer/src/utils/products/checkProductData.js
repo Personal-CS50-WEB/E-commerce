@@ -4,7 +4,13 @@ async function CheckProductData(products, newProduct) {
     const errors = [];
 
     // Check if the product already exists in the database
-    const existingProduct = await getProductFromDatabase(products, newProduct);
+    const query = {
+        name: newProduct.name,
+        color: newProduct.color,
+        'category.gender': newProduct.category.gender,
+        'category.type': newProduct.category.type
+    }
+    const existingProduct = await getProductFromDatabase(products, query);
 
     if (await existingProduct) {
         errors.push({

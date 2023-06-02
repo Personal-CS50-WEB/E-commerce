@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const CheckProductData = require('../../utils/checkProductData');
-const addToBucket = require('../../utils/addToBucket')
-const { storage, upload } = require('../../configs/multer.config')
+const CheckProductData = require('../../utils/products/checkProductData');
+const addToBucket = require('../../utils/products/addToBucket');
+const { storage, upload } = require('../../configs/multer.config');
 const adminCheck = require('../../utils/users/adminCheck');
 
 module.exports = function (products) {
     router.post('/', adminCheck, upload.array("photos[]"), async (req, res) => {
         try {
-            // const { user } = req;
-            // adminCheck(user, res)
-
+    
             const newProduct = req.body;
             const uploadedPhotos = req.files;
 
