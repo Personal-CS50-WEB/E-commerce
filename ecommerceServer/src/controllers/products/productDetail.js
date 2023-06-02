@@ -9,7 +9,12 @@ const router = express.Router();
 module.exports = function (products) {
     router.get("/:id", async (req, res) => {
         try {
+
             const { id } = req.params;
+            // Validate the product ID
+            if (!ObjectId.isValid(id)) {
+                return res.status(400).send({ error: 'Invalid product ID' });
+            }
 
             // Find the product with the provided ID
             const result = await products.findOne({ _id: ObjectId(id) });

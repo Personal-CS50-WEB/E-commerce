@@ -13,7 +13,7 @@ module.exports = function (products) {
                 const params = { "availableItems": { $elemMatch: { "numberOfAvailableItems": { $gt: 0 } } } }
 
                 // Find products based on provided projection and filter criteria
-                const data = await products.find({}).project(projection).toArray();
+                const data = await products.find(params).project(projection).toArray();
                 res.send(data);
             } catch (error) {
                 res.status(500).send({ error: error.message });

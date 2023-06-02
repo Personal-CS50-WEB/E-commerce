@@ -13,8 +13,12 @@ module.exports = function (products) {
     router
         .patch('/:id', adminCheck, upload.array("photos[]"), async (req, res) => {
             try {
-                
                 const { id } = req.params;
+
+                // Validate the product ID
+                if (!ObjectId.isValid(productId)) {
+                    return res.status(400).send({ error: 'Invalid product ID' });
+                }
                 const updateQuery = { _id: ObjectId(id) };
                 let updatedFields = req.body;
                 const uploadedPhotos = req.files;
