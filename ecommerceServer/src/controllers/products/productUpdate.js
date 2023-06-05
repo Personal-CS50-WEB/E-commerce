@@ -23,10 +23,13 @@ module.exports = function (products) {
                 let updatedFields = req.body;
                 const uploadedPhotos = req.files;
                 let deletePhotos = true;
-
+                let errors = [];
                 // Call the validation function to check the updatedFields data
-                await CheckUpdatedData(updatedFields, res, products, id );
-
+                errors = await CheckUpdatedData(updatedFields, res, products, id);
+                if (errors.length > 0) {
+                    // If there are validation errors, return an error response
+                    return res.status(400).send({ errors: errors });
+                }
                 // Update the category fields without deleting other fields
                 updatedFields = await updateCategory(updatedFields);
 

@@ -6,15 +6,14 @@ const { storage, upload } = require('../../configs/multer.config');
 const adminCheck = require('../../utils/users/adminCheck');
 
 module.exports = function (products) {
-    router.post('/', adminCheck, upload.array("photos[]"), async (req, res) => {
+    router.post('/',  upload.array("photos[]"), async (req, res) => {
         try {
     
             const newProduct = req.body;
             const uploadedPhotos = req.files;
 
-            if (uploadedPhotos && uploadedPhotos.length < 1) {
-                res.status(422).send("Photos required");
-                return
+            if (!uploadedPhotos || uploadedPhotos.length < 1) {
+                return res.status(422).send("Photos required");
             }
             let errors = [];
             errors = await CheckProductData(products, newProduct);

@@ -8,7 +8,7 @@ module.exports = async function () {
         // Use the connection
         db = await con.connect();
         // Perform operations on the collection
-        const collectionsToCreate = ['users', 'products', 'likes', 'comments', 'orders'];
+        const collectionsToCreate = ['users', 'products', 'likes', 'comments', 'orders', 'cart'];
         // Create collections if they don't exist
         for (const collectionName of collectionsToCreate) {
             await createCollectionIfNotExists(db, collectionName);
