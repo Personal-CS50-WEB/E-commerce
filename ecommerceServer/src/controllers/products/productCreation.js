@@ -6,7 +6,7 @@ const { storage, upload } = require('../../configs/multer.config');
 const adminCheck = require('../../utils/users/adminCheck');
 
 module.exports = function (products) {
-    router.post('/',  upload.array("photos[]"), async (req, res) => {
+    router.post('/', adminCheck, upload.array("photos[]"), async (req, res) => {
         try {
     
             const newProduct = req.body;

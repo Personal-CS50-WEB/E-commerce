@@ -7,9 +7,10 @@ const deleteFromCartRouter = require('../controllers/cart/deleteFromCart');
 
 module.exports = function (db) {
     const cart = db.collection('cart');
+    const products = db.collection('products');
 
     return router
-        .use(getCartRouter(cart))
-        .use(insertIntoCartRouter(cart))
+        .use(getCartRouter(cart, products))
+        .use(insertIntoCartRouter(cart, products))
         .use(deleteFromCartRouter(cart))
 };
