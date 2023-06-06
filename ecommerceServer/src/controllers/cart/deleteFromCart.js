@@ -7,9 +7,9 @@ module.exports = function (cart) {
     router
         .delete('/', isAuthenticated, async (req, res) => {
             try {
-                console.log(req.user._id)
                 const user = req.user._id;
-                const item = req.body
+                const item = req.body;
+
                 // if the comment excites and the user own it delete from database
                 const existingProduct = await cart.findOne({_id: ObjectId(item.id)});
             
