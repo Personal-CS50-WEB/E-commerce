@@ -117,7 +117,7 @@ Create a .env file in the root directory.
 Specify the required environment variables in the .env file. Refer to the .env.example file for the list of variables.
 
 4. Start the application:
-5. 
+ 
 `cd  ecommerceServer
 npm run dev`
 
