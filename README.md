@@ -55,46 +55,46 @@ The following API endpoints are available in the application:
 
 - User Registration:
 
-     - URL: /api/users/register
+     - URL: `/api/users/register`
           Method: POST
-     - URL: /api/users/login
+     - URL: `/api/users/login`
           Method: POST
-     - URL: /api/users/logout
+     - URL: `/api/users/logout`
           Method: GET
-   - URL: /api/users/add-address
+   - URL:` /api/users/add-address`
      Method: POST  
      
 - User Roles:
-     - URL: /api/users/admin-role
+     - URL: `/api/users/admin-role`
      Method: POST, DELETE
           
 - Products:
-     - URL: /api/products
+     - URL: `/api/products`
           Method: POST, GET
 
-     - URL: /api/products/:productId
+     - URL: `/api/products/:productId`
           Method: POST, GET, DELETE, PATCH
-     - URL: /api/products/search
+     - URL: `/api/products/search`
           Method:  GET
 - Cart:
-      - URL: /api/cart
+      - URL: `/api/cart`
           Method: POST, GET
           
-     - URL: /api/cart/itemId
+     - URL: 1/api/cart/itemId`
           Method: DELETE
 - Orders:
-   - URL: /api/orders
+   - URL: `/api/orders`
           Method: POST, GET
-   - URL: /api/orders/orderId
+   - URL: `/api/orders/orderId`
           Method: GET
 - Likes:
-  - URL: /api/likes/:productId
+  - URL: `/api/likes/:productId`
           Method: POST, GET 
  
 - Comments:
-  - URL: /api/Comments/:productId
+  - URL: `/api/Comments/:productId`
           Method: POST, GET 
-  - URL: /api/Comments/:productId/:commentId
+  - URL: `/api/Comments/:productId/:commentId` 
           Method: DELETE
           
 ## Installation
@@ -104,6 +104,7 @@ The following API endpoints are available in the application:
 `git clone https://github.com/your-username/e-commerce-app.git`
 
 2. Install the dependencies:
+
 `cd ecommerceServer
 npm install`
 
@@ -116,6 +117,7 @@ Create a .env file in the root directory.
 Specify the required environment variables in the .env file. Refer to the .env.example file for the list of variables.
 
 4. Start the application:
+5. 
 `cd  ecommerceServer
 npm run dev`
 
