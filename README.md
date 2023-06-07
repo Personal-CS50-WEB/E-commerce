@@ -35,23 +35,23 @@ The project's folder structure is as follows:
 
 
 
- ecommerce/
- 
-   ├── client/                      # Client-side code (React)
+   ecommerce/
 
-   ├── ecommerceserver/              # Server-side code (Express)
+     ├── client/                      # Client-side code (React)
 
-     ├── configs/                  # Configuration files
+     ├── ecommerceserver/              # Server-side code (Express)
 
-     ├── controllers/              # Request handlers for each route
+       ├── configs/                  # Configuration files
 
-     ├── middlewares/              # Custom middleware functions
+       ├── controllers/              # Request handlers for each route
 
-     ├── models/                   # Database models
+       ├── middlewares/              # Custom middleware functions
 
-     ├── routes/                   # API routes
+       ├── models/                   # Database models
 
-     └── utils/  
+       ├── routes/                   # API routes
 
-     └── server.js  
-    
+       └── utils/  
+
+       └── server.js  
+
