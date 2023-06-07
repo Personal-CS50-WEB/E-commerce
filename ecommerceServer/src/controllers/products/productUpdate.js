@@ -24,6 +24,7 @@ module.exports = function (products) {
                 const uploadedPhotos = req.files;
                 let deletePhotos = true;
                 let errors = [];
+                
                 // Call the validation function to check the updatedFields data
                 errors = await CheckUpdatedData(updatedFields, res, products, id);
                 if (errors.length > 0) {
