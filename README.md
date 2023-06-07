@@ -24,7 +24,8 @@ Create a .env file in the root directory.
 Specify the required environment variables in the .env file. Refer to the .env.example file for the list of variables.
 
 
-4. Start the application:`cd  ecommerceServer
+4. Start the application:
+`cd  ecommerceServer
 npm run dev`
 
 `cd ecommerce
@@ -33,23 +34,23 @@ npm start`
 The project's folder structure is as follows:
 
 
-`ecommerce/
+ `ecommerce/
 
-  ├── client/                   # Client-side code (React)
-  
-  ├── ecommerceserver/          # Server-side code (Express)
-  
-    ├── configs/                  # Configuration files
-    
-    ├── controllers/              # Request handlers for each route
-    
-    ├── middlewares/              # Custom middleware functions
-    
-    ├── models/                   # Database models
-    
-    ├── routes/                   # API routes
-    
-    └── utils/  
-    
-    └── server.js  `
+   ├── client/                   # Client-side code (React)
+
+   ├── ecommerceserver/          # Server-side code (Express)
+
+     ├── configs/                  # Configuration files
+
+     ├── controllers/              # Request handlers for each route
+
+     ├── middlewares/              # Custom middleware functions
+
+     ├── models/                   # Database models
+
+     ├── routes/                   # API routes
+
+     └── utils/  
+
+     └── server.js  `
     
