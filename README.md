@@ -54,4 +54,12 @@ The project's folder structure is as follows:
          └── utils/  
 
          └── server.js  
+        
+  ## User Roles
+  
+  The application has three user roles with different privileges:
+
+- User: Can browse products, add products to cart, place orders, leave comments and likes on products.
+- Admin: In addition to user functionalities, can add, remove, and update products.
+- Manager: In addition to admin functionalities, can add and remove admin users.
 
