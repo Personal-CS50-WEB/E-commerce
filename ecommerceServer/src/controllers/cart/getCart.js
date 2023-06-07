@@ -16,9 +16,9 @@ module.exports = function (cart, products) {
 
                     let productsData = [];
                     for (const item of cartData) {
-
+                    
                         // Find products with matching IDs in the "products" collection
-                        const cartItem = await findItem(products, item.product_id, item.size);
+                        const cartItem = await findItem(products, item.product_id, item.size, ObjectId(item._id));
                         if (cartItem) {
                             productsData.push(cartItem);
                         }

@@ -1,4 +1,4 @@
-async function findItem(products, product_id, size) {
+async function findItem(products, product_id, size, id) {
 
     const params = {
         _id: product_id,
@@ -15,6 +15,7 @@ async function findItem(products, product_id, size) {
     const cartItem = await products.findOne(params, projection);
     if (cartItem){
         cartItem.size = size;
+        cartItem.cartId = id;
     }
     return cartItem;
 }

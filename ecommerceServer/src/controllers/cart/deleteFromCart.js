@@ -5,13 +5,13 @@ const isAuthenticated = require('../../utils/users/authenticationCheck');
 
 module.exports = function (cart) {
     router
-        .delete('/', isAuthenticated, async (req, res) => {
+        .delete('/:itemId', isAuthenticated, async (req, res) => {
             try {
                 const user = req.user._id;
-                const item = req.body;
+                const {itemId} = req.params;
 
                 // if the comment excites and the user own it delete from database
-                const existingProduct = await cart.findOne({_id: ObjectId(item.id)});
+                const existingProduct = await cart.findOne({_id: ObjectId(itemId)});
             
                 //check if item in cart and the authenticated user'id in the record
                 if (existingProduct && existingProduct.user_id.equals(ObjectId(user))) {
