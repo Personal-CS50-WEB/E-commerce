@@ -63,3 +63,10 @@ The project's folder structure is as follows:
 - Admin: In addition to user functionalities, can add, remove, and update products.
 - Manager: In addition to admin functionalities, can add and remove admin users.
 
+## Technologies Used
+
+- MongoDB: A NoSQL database used for storing product, user, cart, order, comment, and like data.
+- Express: A Node.js web application framework used for building the server-side API.
+- React: A JavaScript library used for building the client-side user interface.
+- Node.js: A JavaScript runtime used for running the server-side code.
+- Passport.js: A library used for user authentication and session management.
