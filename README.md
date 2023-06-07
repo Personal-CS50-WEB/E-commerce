@@ -39,7 +39,7 @@ The E-Commerce Application is a web-based platform that allows users to browse a
 - User: Can browse products, add products to cart, place orders, leave comments and likes on products.
 - Admin: In addition to user functionalities, can add, remove, and update products.
 - Manager: In addition to admin functionalities, can add and remove admin users.
-- 
+
 ##  Modules
 Product Creation Module
 The Product Creation module is responsible for handling the creation of new products in the application. It provides an Express.js router that listens for POST requests to the /products endpoint. The module performs various validation checks on the product data and uploads product photos to an AWS S3 bucket. If the data is valid, the module inserts the new product into the database and returns the inserted product data.
