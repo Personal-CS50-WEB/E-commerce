@@ -34,11 +34,11 @@ npm start`
 The project's folder structure is as follows:
 
 
- `ecommerce/
+ ecommerce/
 
-   ├── client/                   # Client-side code (React)
+   ├── client/                      # Client-side code (React)
 
-   ├── ecommerceserver/          # Server-side code (Express)
+   ├── ecommerceserver/              # Server-side code (Express)
 
      ├── configs/                  # Configuration files
 
@@ -52,5 +52,5 @@ The project's folder structure is as follows:
 
      └── utils/  
 
-     └── server.js  `
+     └── server.js  
     
