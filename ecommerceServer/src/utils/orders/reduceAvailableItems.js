@@ -29,7 +29,7 @@ async function reduceAvailableItems(cartData, products) {
             // Remove unwanted keys and add the photo field
             const { cartId, category, color, description, photos, availableItems, onSale, ...updatedCartItem } = cartItem;
             updatedCartItem.photo = photos[0].url;
-            
+
             // Add the updated cart item to the order items array
             orderItems.push(updatedCartItem);
 

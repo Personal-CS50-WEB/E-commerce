@@ -4,8 +4,8 @@ async function getProductFromDatabase(collection, query) {
         const existingProduct = await collection.findOne(query);
         return existingProduct;
     } catch (error) {
-        console.log(error) 
-    
+        console.log(error)
+
     }
 }
 module.exports = getProductFromDatabase;

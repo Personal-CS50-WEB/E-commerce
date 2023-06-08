@@ -23,7 +23,7 @@ async function addToBucket(uploadedPhotos) {
 
             return { url: photoUrl };
         })
-    );   
+    );
     return photoUrls;
 }
 module.exports = addToBucket;
