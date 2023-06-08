@@ -31,7 +31,7 @@ The E-Commerce Application is a web-based platform that allows users to browse a
 
               └── utils/  
 
-              └── server.js  
+         └── server.js  
         
   ## User Roles
   
