@@ -28,6 +28,8 @@ The E-Commerce Application is a web-based platform that allows users to browse a
               ├── models/                   # Database models
 
               ├── routes/                   # API routes
+              
+              ├── tests/                  
 
               └── utils/  
 
