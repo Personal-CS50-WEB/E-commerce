@@ -14,9 +14,9 @@ The E-Commerce Application is a web-based platform that allows users to browse a
 ### The project's folder structure is as follows:
      E-commerce/
 
-       ├── ecommerceClient/                      # Client-side code (React)
+       ├── ecommerceClient/                 # Client-side code (React)
 
-       ├── ecommerceserver/              # Server-side code (Express)
+       ├── ecommerceserver/                 # Server-side code (Express)
 
          ├── src/                 
               ├── configs/                  # Configuration files
