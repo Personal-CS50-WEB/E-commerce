@@ -18,19 +18,21 @@ The E-Commerce Application is a web-based platform that allows users to browse a
 
        ├── ecommerceserver/              # Server-side code (Express)
 
-         ├── configs/                  # Configuration files
+         ├── src/                 
+              ├── configs/                  # Configuration files
 
-         ├── controllers/              # Request handlers for each route
 
-         ├── middlewares/              # Custom middleware functions
+              ├── controllers/              # Request handlers for each route
 
-         ├── models/                   # Database models
+              ├── middlewares/              # Custom middleware functions
 
-         ├── routes/                   # API routes
+              ├── models/                   # Database models
 
-         └── utils/  
+              ├── routes/                   # API routes
 
-         └── server.js  
+              └── utils/  
+
+              └── server.js  
         
   ## User Roles
   
