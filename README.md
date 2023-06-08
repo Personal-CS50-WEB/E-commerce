@@ -21,7 +21,6 @@ The E-Commerce Application is a web-based platform that allows users to browse a
          ├── src/                 
               ├── configs/                  # Configuration files
 
-
               ├── controllers/              # Request handlers for each route
 
               ├── middlewares/              # Custom middleware functions
