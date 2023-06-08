@@ -38,7 +38,7 @@ The E-Commerce Application is a web-based platform that allows users to browse a
 
 - User: Can browse products, add products to cart, place orders, leave comments and likes on products.
 - Admin: In addition to user functionalities, can add, remove, and update products.
-- Manager: In addition to admin functionalities, can add and remove admin users.
+- Manager: In addition to user functionalities, can add and remove admin users.
 
 ### API Endpoints
 The following API endpoints are available in the application:
