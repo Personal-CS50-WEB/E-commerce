@@ -2,13 +2,13 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-module.exports = function(db){
+module.exports = function (db) {
     const users = db.collection('users');
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
             try {
                 // Check if email exists in the database
-                const user = await users.findOne({email:email});
+                const user = await users.findOne({ email: email });
                 if (!user) {
                     return done(null, false, { message: 'Email not found' });
                 }
@@ -27,4 +27,3 @@ module.exports = function(db){
         })
     );
 }
-    

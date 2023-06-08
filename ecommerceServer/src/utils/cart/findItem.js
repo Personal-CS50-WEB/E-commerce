@@ -2,9 +2,11 @@ async function findItem(products, product_id, size, id) {
 
     const params = {
         _id: product_id,
-        availableItems: { $elemMatch: {
-            numberOfAvailableItems: { $gt: 0 },
-            size: size }
+        availableItems: {
+            $elemMatch: {
+                numberOfAvailableItems: { $gt: 0 },
+                size: size
+            }
         }
     }
     const projection = {
@@ -13,7 +15,7 @@ async function findItem(products, product_id, size, id) {
 
     // Find the cart item in the "products" collection
     const cartItem = await products.findOne(params, projection);
-    if (cartItem){
+    if (cartItem) {
         cartItem.size = size;
         cartItem.cartId = id;
     }

@@ -6,6 +6,6 @@ AWS.config.update({
     secretAccessKey: process.env.Secret_access_key,
     region: process.env.region
 });
-const s3 = new AWS.S3({region: process.env.region});
+const s3 = new AWS.S3({ region: process.env.region });
 const bucketName = process.env.AWS_S3_BUCKET_NAME;
-module.exports = {AWS, s3 , bucketName}
+module.exports = { AWS, s3, bucketName }

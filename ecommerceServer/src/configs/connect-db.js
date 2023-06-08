@@ -16,7 +16,7 @@ async function connect() {
         if (!client) {
             client = new MongoClient(url, options);
             await client.connect();
-            db = await client.db( process.env.dbname)
+            db = await client.db(process.env.dbname)
             console.log('Connected to MongoDB');
         }
     } catch (error) {

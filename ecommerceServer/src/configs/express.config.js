@@ -24,12 +24,12 @@ app.use(session({
     bodyParser.json(),
     passport.initialize(),
     passport.session());
-    
+
 async function startServer() {
     try {
         const db = await connectAndCreateCollections();
         let apiRouter = require("../middlewares/api")(db);
-        
+
         require('../configs/local-strategy')(db);
         require('../configs/auth.config')(db);
         // Mount the API router
@@ -57,4 +57,4 @@ process.on('SIGINT', async () => {
     connectDB.close();
     process.exit();
 });
-module.exports = {startServer}
+module.exports = { startServer }
