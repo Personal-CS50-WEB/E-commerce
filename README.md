@@ -159,7 +159,7 @@ The module is for handling user login functionality using Express.js and Passpor
  - **Add Address Module:**
   The module is for adding an address to a user's profile using Express.js and Passport.js. It exports a router that handles POST requests to the ('api/users/add-address') endpoint. The endpoint is protected and requires authentication using the isAuthenticated middleware from the 'utils/users/authenticationCheck' module.
   
-   - **Add Admin Module:**
+ - **Add Admin Module:**
   The module is for adding the admin role to a user's profile using Express.js and Passport.js. It exports a router that handles POST requests to the ('api/users/admin-role') endpoint. The endpoint is protected and requires authorization using the managerCheck middleware from the 'utils/users/managerCheck' module.
 
 Upon receiving a request, the module retrieves the user's email from the request body. It then searches for the user in the 'users' collection using the email. If the user doesn't exist, a 404 error is returned. If the user already has the admin role or is a manager, corresponding error messages are returned.
@@ -193,7 +193,7 @@ The module then queries the 'likes' collection using the find method to retrieve
 Finally, the module sends a response with the number of likes by sending an object with a numLikes property containing the length of the productLikes array.
 ### Comments 
 - **Comment Module:**
-- The module is for creating comments on a specific product using Express.js and MongoDB. It exports a router that handles POST requests to the ('api/comments/:productId') endpoint.
+The module is for creating comments on a specific product using Express.js and MongoDB. It exports a router that handles POST requests to the ('api/comments/:productId') endpoint.
 
 Upon receiving a request, the module extracts the productId from the request parameters and validates it to ensure it is a valid MongoDB ObjectId. It also checks if the comment text is present in the request body and returns an error if it is missing.
 
@@ -203,7 +203,7 @@ Next, the module inserts the comment object into the 'comments' collection using
 
 Finally, the module queries the 'comments' collection to retrieve the inserted comment data using the findOne method and sends the insertedData as the response.
 - **Get Comments Module:**
-- The is module for retrieving comments for a specific product using Express.js and MongoDB. It exports a router that handles GET requests to the ('api/comments/:productId') endpoint.
+ The is module for retrieving comments for a specific product using Express.js and MongoDB. It exports a router that handles GET requests to the ('api/comments/:productId') endpoint.
 
 Upon receiving a request, the module extracts the productId from the request parameters and validates it to ensure it is a valid MongoDB ObjectId.
 
