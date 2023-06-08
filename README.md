@@ -147,12 +147,87 @@ The module's router handles the GET request to ("api/orders/:orderId") endpoint 
 The module then queries the "orders" collection based on the user's ID and the provided order ID. If matching orders are found, they are sent as the response. If no matching orders are found, an empty array is sent as the response.
 
 If an error occurs during the process, a 500 status code with an error message is sent as the response.
+
+### Users 
+- **Signup Module:**
+The module's router handles the POST request to("api/users/signup") endpoint by first extracting the email, password, and username from the request body. It then checks if the email already exists in the database by querying the "users" collection. If an existing user is found, a 409 status code is sent with an error message indicating that the email already exists.
+- **Login Module:**
+The module is for handling user login functionality using Express.js and Passport.js. It exports a router that handles POST requests to the ('api/users/login') endpoint. The module uses the 'local' authentication strategy provided by Passport.js. If the authentication is successful, the user is logged in and a success message is returned. If the authentication fails, an error message is sent. The module relies on a MongoDB collection for user data.
+
+- **Logout Module:**
+ A module for handling user logout functionality using Express.js, Passport.js, and bcrypt. It exports a router that handles GET requests to the('api/users/logout') endpoint. When a user logs out, the 'req.logout' function is called to remove the user's session. 
+ - **Add Address Module:**
+  The module is for adding an address to a user's profile using Express.js and Passport.js. It exports a router that handles POST requests to the ('api/users/add-address') endpoint. The endpoint is protected and requires authentication using the isAuthenticated middleware from the 'utils/users/authenticationCheck' module.
+  
+   - **Add Admin Module:**
+  The module is for adding the admin role to a user's profile using Express.js and Passport.js. It exports a router that handles POST requests to the ('api/users/admin-role') endpoint. The endpoint is protected and requires authorization using the managerCheck middleware from the 'utils/users/managerCheck' module.
+
+Upon receiving a request, the module retrieves the user's email from the request body. It then searches for the user in the 'users' collection using the email. If the user doesn't exist, a 404 error is returned. If the user already has the admin role or is a manager, corresponding error messages are returned.
+
+If the user is eligible to receive the admin role, the module updates the user's role in the MongoDB collection to 'admin' using the updateOne method. If the update is successful, a success message is returned.
+ - **remove Admin Module:**
+ The module for removing the admin role from a user's profile using Express.js and Passport.js. It exports a router that handles DELETE requests to the '/admin-role' endpoint. The endpoint is protected and requires authorization using the managerCheck middleware from the 'utils/users/managerCheck' module.
+
+Upon receiving a request, the module retrieves the user's email from the request body. It then searches for the user in the 'users' collection using the email. If the user doesn't exist, a 404 error is returned. If the user doesn't have the admin role, a 400 error is returned.
+
+If the user has the admin role, the module updates the user's role in the MongoDB collection to 'user' using the updateOne method. If the update is successful, a success message is returned.
+
+### Likes 
+- **Like Module:**
+The module is for handling like/unlike functionality for a product using Express.js and MongoDB. It exports a router that handles POST requests to the ('api/likes/:productId') endpoint. The endpoint is protected and requires authentication using the isAuthenticated middleware from the '/utils/users/authenticationCheck' module.
+
+Upon receiving a request, the module extracts the productId from the request parameters and the authenticated user ID from req.user._id. It validates the productId to ensure it is a valid MongoDB ObjectId.
+
+If the user has already liked the product (an existing like record exists), the module deletes the like record from the 'likes' collection using the deleteOne method.
+
+If the user hasn't liked the product yet, the module inserts a new like record into the 'likes' collection using the insertOne method.
+
+After handling the like/unlike action, the module redirects the user to the 'productId' endpoint.
+-  **Get Likes Module:**
+The module is for retrieving the number of likes for a specific product using Express.js and MongoDB. It exports a router that handles GET requests to the  ('api/likes/:productId') endpoint.
+
+Upon receiving a request, the module extracts the productId from the request parameters and validates it to ensure it is a valid MongoDB ObjectId.
+
+The module then queries the 'likes' collection using the find method to retrieve all likes associated with the given productId. The likes are stored in the productLikes array.
+
+Finally, the module sends a response with the number of likes by sending an object with a numLikes property containing the length of the productLikes array.
+### Comments 
+- **Comment Module:**
+- The module is for creating comments on a specific product using Express.js and MongoDB. It exports a router that handles POST requests to the ('api/comments/:productId') endpoint.
+
+Upon receiving a request, the module extracts the productId from the request parameters and validates it to ensure it is a valid MongoDB ObjectId. It also checks if the comment text is present in the request body and returns an error if it is missing.
+
+The module then creates a comment object containing the user information (ID and username), the product ID, and the comment text.
+
+Next, the module inserts the comment object into the 'comments' collection using the insertOne method. The inserted comment's ID is stored in the insertedId variable.
+
+Finally, the module queries the 'comments' collection to retrieve the inserted comment data using the findOne method and sends the insertedData as the response.
+- **Get Comments Module:**
+- The is module for retrieving comments for a specific product using Express.js and MongoDB. It exports a router that handles GET requests to the ('api/comments/:productId') endpoint.
+
+Upon receiving a request, the module extracts the productId from the request parameters and validates it to ensure it is a valid MongoDB ObjectId.
+
+The module then defines a projection object to specify the fields to include in the query result. In this case, the projection includes the id, commentText, and user fields.
+
+Next, the module queries the 'comments' collection using the find method, specifying the product ID in the query. The project method is used to apply the projection to the query result, and the toArray method is called to retrieve the comments as an array.
+
+Finally, the module sends the productComments array as the response, wrapped in an object for consistency ({ productComments: productComments }).
+- **Delete Comment Module:**
+The module is for deleting a comment for a specific product using Express.js and MongoDB. It exports a router that handles DELETE requests to the ('api/comments/:productId/:commentId') endpoint.
+
+Upon receiving a request, the module extracts the productId and commentId from the request parameters and validates them to ensure they are valid MongoDB ObjectIds.
+
+The module then checks if the comment with the specified commentId exists and if the user owns the comment. If both conditions are met, the comment is deleted from the database using the deleteOne method.
+
+If the comment is successfully deleted, the module sends a response with a success message. Otherwise, if the comment doesn't exist or the user doesn't own the comment, the module sends a response with an error message.
+
 ### Dependencies
 - Express.js: A web application framework for Node.js.
 - AWS SDK: The official JavaScript SDK for interacting with AWS services.
 - Multer: A middleware for handling file uploads in Express.js.
 - MongoDB Driver: A driver for connecting to MongoDB database.
-
+- bcrypt: A library used for hashing passwords. It provides functions for securely hashing passwords using bcrypt algorithm.
+- passport: A library used for authentication in Node.js applications. It provides a middleware layer for handling user authentication strategies.
 ## Installation
 
 1. Clone the repository:
